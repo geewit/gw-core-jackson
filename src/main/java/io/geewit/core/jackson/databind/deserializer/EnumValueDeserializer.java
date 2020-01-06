@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 
 /**
+ * 枚举类型反序列化
  * @author geewit
  */
 @SuppressWarnings({"unused"})

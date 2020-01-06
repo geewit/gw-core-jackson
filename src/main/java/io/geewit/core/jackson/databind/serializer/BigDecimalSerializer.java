@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
+ * BigDecimal类型反序列化
  * @author geewit
  * @since  2016/12/20
  */

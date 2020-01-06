@@ -10,6 +10,7 @@ import org.springframework.boot.jackson.JsonComponent;
 import java.io.IOException;
 
 /**
+ *  Long 序列化为 String
  *  @author geewit
  */
 @JsonComponent

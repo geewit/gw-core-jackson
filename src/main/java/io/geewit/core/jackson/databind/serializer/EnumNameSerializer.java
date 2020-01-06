@@ -9,6 +9,7 @@ import org.springframework.boot.jackson.JsonComponent;
 import java.io.IOException;
 
 /**
+ * 枚举类型序列化
  * @author geewit
  */
 @SuppressWarnings({"unused"})

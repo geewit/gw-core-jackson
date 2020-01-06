@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import java.io.IOException;
 
 /**
+ * org.springframework.data.domain.Page 序列化
  * @author geewit
  */
 @SuppressWarnings({"unused"})

@@ -10,5 +10,7 @@ public interface View {
 
     interface List extends View {}
 
-    interface Info extends List, Page {}
+    interface Tree extends View {}
+
+    interface Info extends List, Page, Tree {}
 }
