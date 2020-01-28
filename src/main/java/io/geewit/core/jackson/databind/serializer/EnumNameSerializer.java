@@ -3,7 +3,7 @@ package io.geewit.core.jackson.databind.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import io.geewit.core.utils.lang.enums.Name;
+import io.geewit.core.utils.enums.Name;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
