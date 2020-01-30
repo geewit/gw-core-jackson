@@ -13,6 +13,7 @@ import java.io.IOException;
  *  Long 序列化为 String
  *  @author geewit
  */
+@SuppressWarnings({"unused"})
 @JsonComponent
 public class LongSerializer extends StdSerializer<Long> {
     private final static Logger logger = LoggerFactory.getLogger(LongSerializer.class);

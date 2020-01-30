@@ -3,7 +3,6 @@ package io.geewit.core.jackson.databind.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.io.IOException;
@@ -20,10 +19,23 @@ public class PasswordSerializer extends JsonSerializer<String> {
     public void serialize(String value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         // put your desired money style here
         if(value != null) {
-            String decodePassword = StringUtils.repeat('*', value.length());
+            String decodePassword = repeat('*', value.length());
             jgen.writeString(decodePassword);
         } else {
-            jgen.writeString(StringUtils.EMPTY);
+            jgen.writeString("");
+        }
+    }
+
+    private static String repeat(char ch, int repeat) {
+        if (repeat <= 0) {
+            return "";
+        } else {
+            char[] buf = new char[repeat];
+            for(int i = repeat - 1; i >= 0; --i) {
+                buf[i] = ch;
+            }
+
+            return new String(buf);
         }
     }
 }
