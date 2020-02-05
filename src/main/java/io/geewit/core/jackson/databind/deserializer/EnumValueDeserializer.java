@@ -17,7 +17,7 @@ import java.lang.reflect.ParameterizedType;
 public abstract class EnumValueDeserializer<E extends Enum<E> & Value> extends JsonDeserializer<E> {
     @SuppressWarnings({"unchecked"})
     public EnumValueDeserializer() {
-        clazz = (Class <E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        clazz = (Class <E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getClass();
     }
 
     private Class<E> clazz;
@@ -25,7 +25,12 @@ public abstract class EnumValueDeserializer<E extends Enum<E> & Value> extends J
 
     @Override
     public E deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        int value = p.getIntValue();
-        return EnumUtils.forToken(clazz, value);
+        String token = p.getText();
+        try {
+            int value = Integer.parseInt(token);
+            return EnumUtils.forToken(clazz, value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }
