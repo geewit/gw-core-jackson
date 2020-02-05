@@ -17,7 +17,7 @@ import java.lang.reflect.ParameterizedType;
 public abstract class EnumNameDeserializer<E extends Enum<E> & Name> extends JsonDeserializer<E> {
     @SuppressWarnings({"unchecked"})
     public EnumNameDeserializer() {
-        clazz = (Class <E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        clazz = (Class <E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0].getClass();
     }
 
     private Class<E> clazz;
