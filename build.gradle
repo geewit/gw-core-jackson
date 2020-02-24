@@ -3,7 +3,6 @@ apply from: "https://gitee.com/geewit/gradle_publish_sonatype/raw/master/publish
 
 dependencies {
     compile("io.geewit.utils.core:gw-core-enum-utils:$gw_utils_version")
-    compile("io.geewit.utils.web:gw-web-utils:$gw_utils_version")
     compile("com.fasterxml.jackson.core:jackson-core:$jackson_version")
     compile("com.fasterxml.jackson.core:jackson-databind:$jackson_version")
     compile("org.springframework.boot:spring-boot:$spring_boot_version")
