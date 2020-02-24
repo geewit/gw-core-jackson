@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 
@@ -18,8 +17,11 @@ import java.io.IOException;
 @JsonComponent
 public class JsonPageSerializer extends JsonSerializer<Page> {
 
-    @Autowired
-    private ObjectMapper mapper;
+    private final ObjectMapper mapper;
+
+    public JsonPageSerializer(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
 
     @Override
     public void serialize(Page page, JsonGenerator jsonGen, SerializerProvider serializerProvider) throws IOException {
