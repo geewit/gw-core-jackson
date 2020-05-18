@@ -6,6 +6,7 @@ dependencies {
     compile("com.fasterxml.jackson.core:jackson-core:$jackson_version")
     compile("com.fasterxml.jackson.core:jackson-databind:$jackson_version")
     compile("org.springframework.boot:spring-boot:$spring_boot_version")
+    compile("org.springframework.boot:spring-boot-autoconfigure:$spring_boot_version")
     compileOnly("org.springframework.data:spring-data-commons:$spring_data_commons_version")
 }
 
