@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.io.IOException;
 
@@ -21,7 +20,6 @@ import java.io.IOException;
 @EnableConfigurationProperties({SpringDataWebProperties.class})
 @JsonComponent
 public class JsonPageSerializer extends JsonSerializer<Page> {
-
     private final ObjectMapper mapper;
 
     public JsonPageSerializer(ObjectMapper mapper) {

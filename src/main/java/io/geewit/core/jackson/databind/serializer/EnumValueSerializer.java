@@ -15,6 +15,8 @@ import java.io.IOException;
 @SuppressWarnings({"unused"})
 @JsonComponent
 public class EnumValueSerializer extends JsonSerializer<Value> {
+    public static final EnumValueSerializer instance = new EnumValueSerializer();
+
     @Override
     public void serialize(Value value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         // put your desired money style here

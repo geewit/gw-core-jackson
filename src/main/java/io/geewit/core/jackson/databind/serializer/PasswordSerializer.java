@@ -15,6 +15,8 @@ import java.io.IOException;
 @SuppressWarnings({"unused"})
 @JsonComponent
 public class PasswordSerializer extends JsonSerializer<String> {
+    public static final PasswordSerializer instance = new PasswordSerializer();
+
     @Override
     public void serialize(String value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         // put your desired money style here

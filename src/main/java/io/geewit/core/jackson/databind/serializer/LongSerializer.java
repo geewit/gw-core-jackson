@@ -18,6 +18,8 @@ import java.io.IOException;
 public class LongSerializer extends StdSerializer<Long> {
     private final static Logger logger = LoggerFactory.getLogger(LongSerializer.class);
 
+    public static final LongSerializer instance = new LongSerializer();
+
     public LongSerializer() {
         super(Long.class);
     }

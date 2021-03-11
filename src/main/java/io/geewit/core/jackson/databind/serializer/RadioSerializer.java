@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 @SuppressWarnings({"unused"})
 @JsonComponent
 public class RadioSerializer extends JsonSerializer<BigDecimal> {
+    public static final RadioSerializer instance = new RadioSerializer();
+
     @Override
     public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         // put your desired money style here
