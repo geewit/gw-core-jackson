@@ -2,6 +2,7 @@ package io.geewit.core.jackson.databind.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,20 @@ public class JsonPageSerializer extends JsonSerializer<Page> {
         jsonGen.writeFieldName("numberOfElements");
         jsonGen.writeNumber(page.getNumberOfElements());
         jsonGen.writeFieldName("content");
-        jsonGen.writeRawValue(mapper.writerWithView(serializerProvider.getActiveView()).writeValueAsString(page.getContent()));
+        String json;
+        if(serializerProvider.getActiveView() != null) {
+            boolean defaultViewInclusionEnabled = mapper.isEnabled(MapperFeature.DEFAULT_VIEW_INCLUSION);
+            if(defaultViewInclusionEnabled) {
+                mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+            }
+            jsonGen.writeRawValue(mapper.writerWithView(serializerProvider.getActiveView()).writeValueAsString(page.getContent()));
+            if(defaultViewInclusionEnabled) {
+                mapper.enable(MapperFeature.DEFAULT_VIEW_INCLUSION);
+            }
+        } else {
+            jsonGen.writeRawValue(mapper.writeValueAsString(page.getContent()));
+        }
+
         jsonGen.writeEndObject();
     }
 
