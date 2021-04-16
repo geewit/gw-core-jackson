@@ -20,21 +20,24 @@ public class LongSerializer extends StdSerializer<Long> {
 
     public static final LongSerializer instance = new LongSerializer();
 
+    private final int maxLength;
+
     public LongSerializer() {
         super(Long.class);
+        this.maxLength = (int)Math.log10(Integer.MAX_VALUE);
     }
 
     @Override
-    public void serialize(Long value, JsonGenerator gen, SerializerProvider serializers) {
-        if (value.toString().length() > 15) {
+    public void serialize(Long value, JsonGenerator generator, SerializerProvider provider) {
+        if (value.toString().length() > this.maxLength) {
             try {
-                gen.writeString(value.toString());
+                generator.writeString(value.toString());
             } catch (IOException e) {
                 logger.warn(e.getMessage());
             }
         } else {
             try {
-                gen.writeNumber(value);
+                generator.writeNumber(value);
             } catch (IOException e) {
                 logger.warn(e.getMessage());
             }

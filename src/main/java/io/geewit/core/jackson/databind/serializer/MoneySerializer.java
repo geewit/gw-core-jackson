@@ -19,8 +19,8 @@ public class MoneySerializer extends JsonSerializer<BigDecimal> {
     public static final MoneySerializer instance = new MoneySerializer();
 
     @Override
-    public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(BigDecimal value, JsonGenerator generator, SerializerProvider provider) throws IOException {
         // put your desired money style here
-        jgen.writeString(value.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
+        generator.writeString(value.setScale(2, BigDecimal.ROUND_HALF_UP).toString());
     }
 }

@@ -8,5 +8,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot:$spring_boot_version")
     compile("org.springframework.boot:spring-boot-autoconfigure:$spring_boot_version")
     compileOnly("org.springframework.data:spring-data-commons:$spring_data_commons_version")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:$junit_version")
+    testCompile("org.junit.platform:junit-platform-launcher:$junit_platform_version")
 }
 

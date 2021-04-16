@@ -31,8 +31,8 @@ public class JsonPageSerializer extends JsonSerializer<Page> {
     protected SpringDataWebProperties springDataWebProperties;
 
     @Override
-    public void serialize(Page page, JsonGenerator jsonGen, SerializerProvider serializerProvider) throws IOException {
-        jsonGen.writeStartObject();
+    public void serialize(Page page, JsonGenerator generator, SerializerProvider provider) throws IOException {
+        generator.writeStartObject();
         String sizeParameter = "size";
         String pageParameter = "number";
         if(springDataWebProperties != null) {
@@ -42,38 +42,39 @@ public class JsonPageSerializer extends JsonSerializer<Page> {
                 pageParameter = pageable.getPageParameter();
             }
         }
-        jsonGen.writeFieldName(sizeParameter);
-        jsonGen.writeNumber(page.getSize());
+        generator.writeFieldName(sizeParameter);
+        generator.writeNumber(page.getSize());
 
-        jsonGen.writeFieldName(pageParameter);
-        jsonGen.writeNumber(page.getNumber());
-        jsonGen.writeFieldName("totalElements");
-        jsonGen.writeNumber(page.getTotalElements());
-        jsonGen.writeFieldName("last");
-        jsonGen.writeBoolean(page.isLast());
-        jsonGen.writeFieldName("totalPages");
-        jsonGen.writeNumber(page.getTotalPages());
-        jsonGen.writeObjectField("sort", page.getSort());
-        jsonGen.writeFieldName("first");
-        jsonGen.writeBoolean(page.isFirst());
-        jsonGen.writeFieldName("numberOfElements");
-        jsonGen.writeNumber(page.getNumberOfElements());
-        jsonGen.writeFieldName("content");
+        generator.writeFieldName(pageParameter);
+        generator.writeNumber(page.getNumber());
+        generator.writeFieldName("totalElements");
+        generator.writeNumber(page.getTotalElements());
+        generator.writeFieldName("last");
+        generator.writeBoolean(page.isLast());
+        generator.writeFieldName("totalPages");
+        generator.writeNumber(page.getTotalPages());
+        generator.writeObjectField("sort", page.getSort());
+        generator.writeFieldName("first");
+        generator.writeBoolean(page.isFirst());
+        generator.writeFieldName("numberOfElements");
+        generator.writeNumber(page.getNumberOfElements());
+        generator.writeFieldName("content");
         String json;
-        if(serializerProvider.getActiveView() != null) {
+        if(provider.getActiveView() != null) {
             boolean defaultViewInclusionEnabled = mapper.isEnabled(MapperFeature.DEFAULT_VIEW_INCLUSION);
             if(defaultViewInclusionEnabled) {
                 mapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
             }
-            jsonGen.writeRawValue(mapper.writerWithView(serializerProvider.getActiveView()).writeValueAsString(page.getContent()));
+            json = mapper.writerWithView(provider.getActiveView()).writeValueAsString(page.getContent());
+
             if(defaultViewInclusionEnabled) {
                 mapper.enable(MapperFeature.DEFAULT_VIEW_INCLUSION);
             }
         } else {
-            jsonGen.writeRawValue(mapper.writeValueAsString(page.getContent()));
+            json = mapper.writeValueAsString(page.getContent());
         }
-
-        jsonGen.writeEndObject();
+        generator.writeRawValue(json);
+        generator.writeEndObject();
     }
 
 }

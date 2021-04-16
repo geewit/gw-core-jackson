@@ -18,23 +18,23 @@ public class PasswordSerializer extends JsonSerializer<String> {
     public static final PasswordSerializer instance = new PasswordSerializer();
 
     @Override
-    public void serialize(String value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(String value, JsonGenerator generator, SerializerProvider provider) throws IOException {
         // put your desired money style here
         if(value != null) {
             String decodePassword = repeat('*', value.length());
-            jgen.writeString(decodePassword);
+            generator.writeString(decodePassword);
         } else {
-            jgen.writeString("");
+            generator.writeString("");
         }
     }
 
-    private static String repeat(char ch, int repeat) {
+    private static String repeat(char value, int repeat) {
         if (repeat <= 0) {
             return "";
         } else {
             char[] buf = new char[repeat];
             for(int i = repeat - 1; i >= 0; --i) {
-                buf[i] = ch;
+                buf[i] = value;
             }
 
             return new String(buf);

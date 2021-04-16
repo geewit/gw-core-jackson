@@ -18,8 +18,8 @@ public class RadioSerializer extends JsonSerializer<BigDecimal> {
     public static final RadioSerializer instance = new RadioSerializer();
 
     @Override
-    public void serialize(BigDecimal value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(BigDecimal value, JsonGenerator generator, SerializerProvider provider) throws IOException {
         // put your desired money style here
-        jgen.writeString(value.setScale(4, BigDecimal.ROUND_HALF_UP).toString());
+        generator.writeString(value.setScale(4, BigDecimal.ROUND_HALF_UP).toString());
     }
 }

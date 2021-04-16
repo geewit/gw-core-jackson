@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @author geewit
+ */
 @ComponentScan("io.geewit.core.jackson.databind.serializer")
 @Configuration
 public class GwJacksonConfig {

@@ -20,12 +20,11 @@ public abstract class EnumNameDeserializer<E extends Enum<E> & Name> extends Jso
         clazz = (Class <E>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
-    private Class<E> clazz;
-
+    private final Class<E> clazz;
 
     @Override
-    public E deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        String name = p.getText();
+    public E deserialize(JsonParser parser, DeserializationContext context) throws IOException {
+        String name = parser.getText();
         return EnumUtils.forToken(clazz, name);
     }
 }

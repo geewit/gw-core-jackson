@@ -18,8 +18,8 @@ public class EnumValueSerializer extends JsonSerializer<Value> {
     public static final EnumValueSerializer instance = new EnumValueSerializer();
 
     @Override
-    public void serialize(Value value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    public void serialize(Value value, JsonGenerator generator, SerializerProvider provider) throws IOException {
         // put your desired money style here
-        jgen.writeString(String.valueOf(value.value()));
+        generator.writeString(String.valueOf(value.value()));
     }
 }
