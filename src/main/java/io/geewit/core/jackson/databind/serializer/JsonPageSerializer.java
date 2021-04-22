@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 
@@ -18,17 +16,15 @@ import java.io.IOException;
  * @author geewit
  */
 @SuppressWarnings({"unused"})
-@EnableConfigurationProperties({SpringDataWebProperties.class})
 @JsonComponent
 public class JsonPageSerializer extends JsonSerializer<Page> {
     private final ObjectMapper mapper;
+    private final SpringDataWebProperties springDataWebProperties;
 
-    public JsonPageSerializer(ObjectMapper mapper) {
+    public JsonPageSerializer(ObjectMapper mapper, SpringDataWebProperties springDataWebProperties) {
         this.mapper = mapper;
+        this.springDataWebProperties = springDataWebProperties;
     }
-
-    @Autowired(required = false)
-    protected SpringDataWebProperties springDataWebProperties;
 
     @Override
     public void serialize(Page page, JsonGenerator generator, SerializerProvider provider) throws IOException {
