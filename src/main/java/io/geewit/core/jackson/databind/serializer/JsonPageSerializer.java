@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 
@@ -19,29 +18,18 @@ import java.io.IOException;
 @JsonComponent
 public class JsonPageSerializer extends JsonSerializer<Page> {
     private final ObjectMapper mapper;
-    private final SpringDataWebProperties springDataWebProperties;
 
-    public JsonPageSerializer(ObjectMapper mapper, SpringDataWebProperties springDataWebProperties) {
+    public JsonPageSerializer(ObjectMapper mapper) {
         this.mapper = mapper;
-        this.springDataWebProperties = springDataWebProperties;
     }
 
     @Override
     public void serialize(Page page, JsonGenerator generator, SerializerProvider provider) throws IOException {
         generator.writeStartObject();
-        String sizeParameter = "size";
-        String pageParameter = "number";
-        if(springDataWebProperties != null) {
-            SpringDataWebProperties.Pageable pageable = springDataWebProperties.getPageable();
-            if(pageable != null) {
-                sizeParameter = pageable.getSizeParameter();
-                pageParameter = pageable.getPageParameter();
-            }
-        }
-        generator.writeFieldName(sizeParameter);
+        generator.writeFieldName("size");
         generator.writeNumber(page.getSize());
 
-        generator.writeFieldName(pageParameter);
+        generator.writeFieldName("number");
         generator.writeNumber(page.getNumber());
         generator.writeFieldName("totalElements");
         generator.writeNumber(page.getTotalElements());
